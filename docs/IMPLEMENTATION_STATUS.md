@@ -21,7 +21,7 @@ Latest executed checkpoint: npm test passed 22 dependency-free unit tests, inclu
 
 Dependencies are now installed and package-lock.json exists (user installed them from PowerShell). Full TypeScript checking and ESLint pass after fixing Playwright config syntax, the MongoDB cache replacement type, and initial refresh scheduling. The default Turbopack production build fails in sandbox process/IPC setup; the webpack fallback also fails with EPERM writing generated .next/types files. No successful production build or browser E2E is claimed. Atlas initialization has failed in the user's shell and remains unresolved. No Twitch login/EventSub delivery, real Jev request, Vercel deployment, video upload or Devpost submission is claimed successful.
 
-Publishing checkpoint: native Git cannot resolve github.com, and the connected GitHub account cannot access mhamzanadeem/crowdplay (404). The project root .git/index.lock is denied by sandbox permissions. An isolated .publish-git repository is being used to prepare meaningful main-branch commits and a portable bundle. No remote push success is asserted.
+Publishing checkpoint: native Git cannot resolve github.com, and the connected GitHub account cannot access mhamzanadeem/crowdplay (404). The project root .git/index.lock is denied by sandbox permissions. An isolated .publish-git repository contains 36 meaningful source/documentation commits plus a publishing-status commit on main, with a verified portable crowdplay-history.bundle. A normal push was attempted and failed DNS. No remote push success is asserted.
 
 ## Files and commands
 

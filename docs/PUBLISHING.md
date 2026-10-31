@@ -17,3 +17,10 @@ This is a normal push, not a force push. If GitHub already has commits on main, 
 The bundle is a portable backup of the prepared main history. It can be inspected with `git bundle verify crowdplay-history.bundle` and cloned into a new empty directory if needed. It is not evidence that GitHub received the commits.
 
 Current validation: 22 unit tests, source checks, TypeScript and ESLint pass. Production build remains blocked by sandbox process/EPERM errors; live database and browser verification remain pending. Review dependency advisories reported during installation before production deployment.
+
+
+## Recorded result
+
+Prepared 36 meaningful source/documentation commits, plus a publishing-status commit, on isolated main. All 111 source files were matched against the publish manifest; configured local secrets were absent. The .env.local file, dependencies, builds and Git metadata are excluded. git fsck and bundle verification passed.
+
+A normal push was attempted and failed because this environment cannot resolve github.com. The connected GitHub account also returns 404 for the target repository. Therefore no remote commit or branch update is confirmed. Run the PowerShell push command above from a network/account that can access the repository. The root .git remains separate because sandbox writes there are denied.
