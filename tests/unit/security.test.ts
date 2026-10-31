@@ -1,0 +1,14 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {createHmac} from 'node:crypto';
+import {encrypt,decrypt,sign,verify,digest} from '../../src/lib/auth/crypto.ts';
+import {createConfirmation,checkConfirmation} from '../../src/lib/auth/confirmation.ts';
+import {verifyEvent} from '../../src/lib/twitch/eventsub.ts';
+const key='ab'.repeat(32),secret='session-test-secret-'.repeat(3);
+test('OAuth token encryption authenticates ciphertext and uses unique IVs',()=>{const first=encrypt('test-token',key),second=encrypt('test-token',key);assert.notEqual(first,second);assert.equal(decrypt(first,key),'test-token');assert.throws(()=>decrypt(first,'cd'.repeat(32)));const parts=first.split('.');parts[2]=(parseInt(parts[2].slice(0,2),16)^255).toString(16).padStart(2,'0')+parts[2].slice(2);assert.throws(()=>decrypt(parts.join('.'),key));assert.throws(()=>encrypt('x','short'))});
+test('signed state rejects modification and expiration',()=>{const state=sign({exp:Date.now()+10000,nonce:'test'},secret);assert.equal(verify(state,secret).nonce,'test');assert.throws(()=>verify(state+'x',secret));assert.throws(()=>verify(sign({exp:Date.now()-1},secret),secret));assert.notEqual(digest('session-a'),digest('session-b'))});
+test('deletion confirmation is bound to actor, channel, exact message and action',()=>{const binding={userId:'moderator-a',channelId:'channel-a',messageId:'message-a',twitchMessageId:'twitch-a',text:'original'};const token=createConfirmation(binding,secret);assert.ok(checkConfirmation(token,binding,secret));for(const field of ['userId','channelId','messageId','twitchMessageId','text'] as const)assert.throws(()=>checkConfirmation(token,{...binding,[field]:'changed'},secret));assert.throws(()=>checkConfirmation(sign({exp:Date.now()+1000,action:'ban'},secret),binding,secret))});
+const now=Date.parse('2026-10-31T12:00:00Z'),raw='{"event":{"message":"test"}}',webhookSecret='test-webhook-secret';
+function headers(at=new Date(now).toISOString(),body=raw){const h=new Headers({'Twitch-Eventsub-Message-Id':'event-1','Twitch-Eventsub-Message-Timestamp':at});h.set('Twitch-Eventsub-Message-Signature','sha256='+createHmac('sha256',webhookSecret).update('event-1'+at+body).digest('hex'));return h}
+test('EventSub accepts exact signed raw body, rejects reserialization/tampering',()=>{const h=headers();assert.equal(verifyEvent(raw,h,webhookSecret,now),true);assert.equal(verifyEvent(raw+' ',h,webhookSecret,now),false);assert.equal(verifyEvent(raw,h,'wrong-secret',now),false);assert.equal(verifyEvent(raw,new Headers(),webhookSecret,now),false)});
+test('EventSub rejects stale and future timestamps, even with valid HMAC',()=>{assert.equal(verifyEvent(raw,headers(new Date(now-600001).toISOString()),webhookSecret,now),false);assert.equal(verifyEvent(raw,headers(new Date(now+600001).toISOString()),webhookSecret,now),false);assert.equal(verifyEvent(raw,headers('invalid'),webhookSecret,now),false)});
