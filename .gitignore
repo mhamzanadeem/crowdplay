@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.vercel/
+.env*
+!.env.example
+*.tsbuildinfo
+coverage/
+test-results/
+.DS_Store
+research/reference/
+
+# Isolated publishing metadata and handover artifacts
+.publish-git/
+*.bundle
+playwright-report/
