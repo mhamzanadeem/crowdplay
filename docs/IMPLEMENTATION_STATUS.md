@@ -37,3 +37,5 @@ Executed: secret-redacted environment-key inspection; environment normalization 
 4. Finish SESSION_SECRET/ENCRYPTION_KEY/Twitch/TypeSafe configuration, verify real OAuth → chat → classification → human review, then deploy and prepare actual submission evidence.
 
 See MONGODB_SETUP.md for exact commands. Broadcaster-only scope, three-second authenticated polling, bounded message/history windows, estimated provider budget and daily idle recovery remain MVP limitations. Root Git metadata is protected; publishing uses isolated metadata as documented in PUBLISHING.md.
+
+2026-11-01 housekeeping: expanded root .gitignore; validated representative ignored paths and required tracked inputs with git check-ignore. No runtime code changed; prior runtime/build verification limitations remain.

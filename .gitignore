@@ -1,15 +1,56 @@
+# Dependencies and package-manager caches
 node_modules/
+.pnpm-store/
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+
+# Next.js, deployment output and generated caches
 .next/
+out/
+dist/
+build/
 .vercel/
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Local credentials (keep only the placeholder template)
 .env*
 !.env.example
-*.tsbuildinfo
+*.pem
+*.key
+
+# Test and coverage output
 coverage/
 test-results/
-.DS_Store
-research/reference/
+playwright-report/
+playwright/.cache/
+blob-report/
 
-# Isolated publishing metadata and handover artifacts
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+/tmp/
+/temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS and local IDE files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+*.suo
+*.user
+
+# Downloaded reference material and local publishing artifacts
+research/reference/
 .publish-git/
 *.bundle
-playwright-report/
