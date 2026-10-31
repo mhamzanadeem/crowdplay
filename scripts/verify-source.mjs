@@ -1,0 +1,10 @@
+import {readFile,readdir,stat} from 'node:fs/promises';
+import {stripTypeScriptTypes} from 'node:module';
+import path from 'node:path';
+const root=process.cwd();
+async function walk(dir){const result=[];for(const name of await readdir(dir)){const full=path.join(dir,name);if((await stat(full)).isDirectory())result.push(...await walk(full));else result.push(full)}return result}
+const source=(await Promise.all(['src','tests','scripts'].map(d=>walk(path.join(root,d))))).flat();let parsed=0,tsx=0;
+for(const file of source){if(file.endsWith('.ts')){stripTypeScriptTypes(await readFile(file,'utf8'),{mode:'transform',sourceUrl:file});parsed++}if(file.endsWith('.tsx'))tsx++;if(/\.(ts|tsx)$/.test(file)){const text=await readFile(file,'utf8');for(const match of text.matchAll(/(?:from\s+|import\s*)['"]([^'"]+)['"]/g)){const target=match[1];if(!target.startsWith('.')&&!target.startsWith('@/'))continue;const full=target.startsWith('@/')?path.join(root,'src',target.slice(2)):path.resolve(path.dirname(file),target);const candidates=[full,full+'.ts',full+'.tsx',path.join(full,'index.ts')];let found=false;for(const candidate of candidates)try{if((await stat(candidate)).isFile()){found=true;break}}catch{}if(!found)throw new Error(`Unresolved local import: ${file}: ${target}`)}}}
+for(const name of ['package.json','tsconfig.json','components.json','vercel.json'])JSON.parse(await readFile(name,'utf8'));
+for(const name of ['.env.example','.env.sample']){let content;try{content=await readFile(name,'utf8')}catch{continue}for(const match of content.matchAll(/^(DB_URL|MONGODB_URI|TYPESAFE_API_KEY|TWITCH_CLIENT_SECRET|TWITCH_EVENTSUB_SECRET|ENCRYPTION_KEY|SESSION_SECRET|CRON_SECRET)[ \t]*=[ \t]*([^\r\n]*)$/gm)){if(match[2].trim())throw new Error(`Secret-bearing example rejected: ${name}, key ${match[1]}. Move credentials to ignored .env.local.`)}}
+console.log(`PASS: ${parsed} TypeScript files parsed; relative imports and JSON configs resolved. ${tsx} TSX files require the pending dependency installation and TypeScript/Next build. This is not a typecheck or browser test.`);
