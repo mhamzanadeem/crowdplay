@@ -21,6 +21,7 @@ build/
 *.pem
 *.key
 
+AGENTS.md
 # Test and coverage output
 coverage/
 test-results/
@@ -54,3 +55,19 @@ Desktop.ini
 research/reference/
 .publish-git/
 *.bundle
+
+# Local project guidance, planning and handover material
+/AGENTS.md
+/components.json
+/design-preview/
+/design-review/
+/docs/
+/research/
+/submission/
+/.publishKit/
+
+# Keep only scripts required by package.json commands
+/scripts/*
+!/scripts/init-database.ts
+!/scripts/evaluate.ts
+!/scripts/verify-source.mjs
