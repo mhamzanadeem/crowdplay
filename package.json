@@ -1,0 +1,49 @@
+{
+  "name": "crowdplay-moderation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "test": "node --experimental-strip-types --test tests/unit/*.test.ts",
+    "test:database": "node --env-file-if-exists=.env.local --experimental-strip-types --test tests/integration/*.test.ts",
+    "evaluate": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/evaluate.ts",
+    "test:e2e": "playwright test",
+    "verify:source": "node scripts/verify-source.mjs",
+    "db:init": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/init-database.ts"
+  },
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0",
+    "lucide-react": "^0.562.0",
+    "recharts": "^3.6.0",
+    "zod": "^4.3.0",
+    "server-only": "^0.0.1",
+    "mongodb": "^6.20.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "^16.4.3",
+    "tsx": "^4.21.0",
+    "@playwright/test": "^1.56.1"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
