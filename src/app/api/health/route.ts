@@ -1,2 +1,5 @@
 import {noStore} from '@/lib/server/http';
-export async function GET(){return noStore({service:'crowdplay',status:'running',version:'0.1.0'})}
+import {serviceHealth} from '@/lib/services/live';
+export const dynamic='force-dynamic';
+export const runtime='nodejs';
+export async function GET(){const services=await serviceHealth();return noStore({status:services.every(s=>s.status==='connected'||s.status==='deferred')?'healthy':'degraded',services})}
