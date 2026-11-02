@@ -71,3 +71,5 @@ research/reference/
 !/scripts/init-database.ts
 !/scripts/evaluate.ts
 !/scripts/verify-source.mjs
+
+!/scripts/check-services.ts

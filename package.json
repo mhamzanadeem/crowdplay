@@ -14,7 +14,8 @@
     "evaluate": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/evaluate.ts",
     "test:e2e": "playwright test",
     "verify:source": "node scripts/verify-source.mjs",
-    "db:init": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/init-database.ts"
+    "db:init": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/init-database.ts",
+    "test:services": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/check-services.ts"
   },
   "dependencies": {
     "next": "^16.4.3",
