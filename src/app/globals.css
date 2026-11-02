@@ -8,3 +8,34 @@
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .btn-primary{background:var(--green);color:#1c2b15;border-color:var(--green);font-weight:650}.btn-primary:hover{background:#c4f7a3}.btn-danger{background:#4a2929;color:#ffd0ce;border-color:#8a4545}.btn-ghost{background:transparent;border-color:transparent}.btn-sm{padding:5px 9px}.btn-icon{padding:5px;width:29px;height:29px}.btn svg{flex-shrink:0}.spaced{margin-top:18px}.block{display:block}.message-preview{max-width:320px;margin-top:8px;font-size:10px;color:#a2aea6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.detail-meta{margin-top:11px}.dialog-overlay{position:fixed;inset:0;background:#080b0bc2;backdrop-filter:blur(2px);z-index:30}.drawer-content{position:fixed;right:0;top:0;height:100dvh;width:510px;max-width:96vw;background:#1a1f20;border-left:1px solid #414b43;z-index:31;overflow-y:auto;box-shadow:-20px 0 60px #0006}.drawer-content .drawer-head{padding-right:65px}.dialog-content{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:450px;max-width:94vw;max-height:90vh;overflow-y:auto;padding:27px;background:#1a1f20;border:1px solid #414b43;border-radius:10px;z-index:35}.dialog-content h2{font-size:19px;margin:0 18px 12px 0}.dialog-content>p{color:#afbcaf;font-size:12px}.dialog-close{position:absolute;right:20px;top:20px;display:grid;place-items:center;width:27px;height:27px;border:1px solid #445044;border-radius:6px;background:#2a3230;color:#becdbf}.drawer-content>.dialog-close{position:fixed}.dialog-content .detail-message{font-size:12px}.error-banner{border:1px solid #77413d;background:#342323;padding:13px;color:#f1b5ab;font-size:12px;border-radius:7px;margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.note-input,.settings-field input,.threshold{background:#141819;border:1px solid #3a443d;color:#d2dfd1;border-radius:5px;padding:8px;font-size:12px}.note-input{width:100%;min-height:80px;resize:vertical}.threshold{width:65px;margin-left:7px}.settings-field{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0;font-size:12px;color:#b7c3b7}.settings-field input{width:90px}.check-label{display:flex;gap:10px;margin:17px 0;font-size:12px;color:#c2cec0}.check-label input{accent-color:var(--green)}.react-chart{height:215px;padding:0 14px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skeleton{height:130px;background:#212725;border-radius:8px;margin:20px 0;animation:pulse 1.5s ease-in-out infinite}@keyframes pulse{50%{opacity:.4}}.rule-settings label{white-space:nowrap}.top-actions .btn-icon{color:#b9c4b7}.quiet-note svg{flex-shrink:0}.loading{color:#a3b09f}.detail-note{overflow-wrap:anywhere}.rule-description h3 .badge{margin-left:7px}.activity{max-height:430px;overflow-y:auto}.donut-center{font-variant-numeric:tabular-nums}
+
+/* Readable typography while preserving the approved dark dashboard. */
+:root{--muted:#bbc3be;--text:#f4f6f4;--foreground:#f4f6f4}
+body{font-family:Inter,"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:650;letter-spacing:-.025em}h1{font-size:32px}h2{font-size:16px}h3{font-size:15px}
+p,.subtitle,.rule p,.setting-block p{font-size:14px;color:#bdc7bf;line-height:1.7}
+nav a,.btn,table,.workspace,.profile{font-size:13px}.viewer b,.connection strong{font-size:13px}
+.workspace small,.profile small,.connection small,.metric-note,.card-head small,.activity-item small,.table-bottom,.detail-note{font-size:12px;color:#b7c3ba}
+.metric-label,.activity-item p,.message-preview{font-size:13px;color:#c7d0c9}
+.badge,thead,.pill,.tab,.legend,.chart-note,.risk-key,.meta,.detail-label,.section-title{font-size:12px}
+.eyebrow,.nav-caption,.demo-pill{font-size:11px;letter-spacing:.06em;color:#c2cdc0}
+.chart text{fill:#b7c3ba}footer{font-size:12px;color:#abb9ae}.human p{font-size:12px;color:#b7c3ba}
+.signin{min-height:100dvh;display:grid;place-items:center;padding:32px 20px}.signin-card{width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px}.signin-card .brand{padding:0 0 24px}.signin-card p{margin:16px 0}.signin-card .btn{padding:12px 20px;font-size:15px}.signin-security{color:var(--muted)}
+.service-status{display:grid;gap:8px;margin:16px 0}.service-status .error-banner{margin:0;align-items:flex-start;flex-direction:column;gap:3px;font-size:13px}.service-connected{padding:8px 12px;border:1px solid #3d5138;border-radius:7px;color:#c8e8b5;font-size:12px;display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:620px){.signin-card{padding:24px}h1{font-size:28px}nav a{font-size:12px}.rule p,.human p{font-size:13px}}
+
+.service-pending{padding:10px 12px;border:1px solid #70633c;border-radius:7px;color:#e8d7ad;font-size:13px;display:flex;gap:10px;flex-wrap:wrap}
+
+.service-deferred{padding:10px 12px;border:1px solid var(--line);border-radius:7px;color:var(--muted);font-size:13px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* Simplified workspace chrome and consistent sidebar interactions. */
+.sidebar{overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding-top:26px}
+.sidebar nav{gap:7px}.sidebar nav a,.sidebar-logout{min-height:44px;border-radius:9px;transition:background-color .16s ease,color .16s ease,transform .16s ease}
+.sidebar nav a:hover,.sidebar-logout:hover{transform:translateX(2px)}
+.sidebar-logout{display:flex;align-items:center;gap:13px;width:100%;padding:11px 13px;background:transparent;border:0;color:#bbc3be;font-size:13px;text-align:left}
+.sidebar-logout:hover{background:#302425;color:#f4b4b0}.sidebar-logout:disabled{transform:none}
+.sidebar-bottom{padding-top:24px}.sidebar .profile{border-top:1px solid var(--line);padding:18px 8px 0}
+.identity{flex:1;min-width:0;overflow:hidden}.identity-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-weight:600}
+.viewer{min-width:0}.viewer-label{min-width:0;max-width:180px;overflow:hidden}.viewer-label b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.app>main{min-height:calc(100dvh - 65px);padding-top:36px}
+@media(max-width:620px){.sidebar nav{gap:4px}.sidebar-logout{width:auto;flex-shrink:0;min-height:36px;white-space:nowrap;padding:8px 10px;font-size:12px;gap:6px}.sidebar nav a{min-height:36px}.sidebar nav a:hover,.sidebar-logout:hover{transform:none}.app>main{padding-top:24px}}
