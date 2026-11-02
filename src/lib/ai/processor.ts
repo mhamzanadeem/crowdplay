@@ -1,3 +1,4 @@
+import {jevEnabled} from '../services/config';
 import 'server-only';
 import {store} from '../database/client';
 import {channelRules,channelSettings,mapMessage} from '../database/repository';
@@ -23,6 +24,7 @@ export async function processChannel(channelId:string) {
   }
   return {processed:0,paused:reason};
  }
+ if(!jevEnabled(process.env.JEV_ENABLED))return pause('Jev integration deferred');
  if(!settings.classificationEnabled||!settings.thirdPartyConsent)return pause('AI paused: enable classification and authorize TypeSafe processing in Settings.');
  if(!process.env.TYPESAFE_API_KEY)return pause('Jev key not configured.');
  let price:ReturnType<typeof pricing>;

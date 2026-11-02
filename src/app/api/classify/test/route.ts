@@ -1,3 +1,4 @@
+import {jevEnabled} from '@/lib/services/config';
 import {actor,rateLimit} from '@/lib/auth/session';
 import {sameOrigin,failure,noStore,HttpError} from '@/lib/server/http';
 import {store} from '@/lib/database/client';
@@ -7,6 +8,7 @@ export async function POST(request:Request) {
  try {
   sameOrigin(request);
   const a=await actor();
+  if(!jevEnabled(process.env.JEV_ENABLED))throw new HttpError(409,'Jev integration deferred');
   await rateLimit('jev-test:'+a.userId,3,3600);
   const database=await store(),price=pricing(),model=process.env.JEV_MODEL||'jev-1.13.0';
   const payload=buildRequest([{id:'health-test',author:'synthetic',text:'Hello, enjoying the stream!',at:new Date().toISOString()}],[],model);

@@ -21,7 +21,7 @@ export async function messageFor(channelId:string,messageId:string) {return (awa
 export async function getWorkspace(actor:Actor):Promise<Workspace> {
  const snapshot=await (await store()).workspaceData(actor.userId,actor.channelId);
  const {channel,settings,messages,actions,rules,usage}=snapshot,config=readiness();
- const aiStatus=!config.jev?'Jev key not configured':!config.pricing?'Classification paused: account pricing not configured':!settings.third_party_consent?'Classification paused: TypeSafe processing consent required':!settings.classification_enabled?'Classification paused by channel owner':'Jev configured · inspect message processing status for failures';
+ const aiStatus=!config.jevEnabled?'Jev integration deferred':!config.jev?'Jev key not configured':!config.pricing?'Classification paused: account pricing not configured':!settings.third_party_consent?'Classification paused: TypeSafe processing consent required':!settings.classification_enabled?'Classification paused by channel owner':'Jev configured · inspect message processing status for failures';
  return {
   mode:'live',channel:{id:channel.id,twitchId:channel.twitch_id,login:channel.login,displayName:channel.display_name,subscriptionStatus:channel.subscription_status,lastEventAt:channel.last_event_at},
   messages:messages.slice(0,500).map(mapMessage),rules:rules.length?rules:structuredClone(defaultRules),
